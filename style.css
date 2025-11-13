@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: white;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-board {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    min-height: 300px;
+}
+
+.tube {
+    width: 80px;
+    height: 200px;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.1) 100%);
+    border: 3px solid #ffffff;
+    border-radius: 0 0 40px 40px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tube:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.tube.selected {
+    border-color: #ffd700;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(255, 215, 0, 0.5);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.water-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 37px 37px;
+    transition: all 0.5s ease;
+}
+
+.water-layer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 50%;
+}
+
+/* Water colors */
+.water-red { background: linear-gradient(to bottom, #ff6b6b, #ee5a52); }
+.water-blue { background: linear-gradient(to bottom, #4dabf7, #339af0); }
+.water-green { background: linear-gradient(to bottom, #51cf66, #37b24d); }
+.water-yellow { background: linear-gradient(to bottom, #ffd43b, #fab005); }
+.water-purple { background: linear-gradient(to bottom, #9775fa, #845ef7); }
+.water-orange { background: linear-gradient(to bottom, #ff922b, #fd7e14); }
+.water-pink { background: linear-gradient(to bottom, #f06595, #e64980); }
+.water-cyan { background: linear-gradient(to bottom, #22b8cf, #15aabf); }
+
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .tube {
+        width: 60px;
+        height: 150px;
+    }
+    
+    .game-board {
+        gap: 15px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+}
