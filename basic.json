@@ -1,0 +1,50 @@
+{
+  "name": "Puzzle 2025-11-13",
+  "description": "Custom water sort puzzle",
+  "tubes": [
+    {
+      "id": 0,
+      "waterLayers": [
+        "color3",
+        "color2",
+        "color2",
+        "color3"
+      ]
+    },
+    {
+      "id": 1,
+      "waterLayers": [
+        "color2",
+        "color3",
+        "color2",
+        "color3"
+      ]
+    },
+    {
+      "id": 2,
+      "waterLayers": []
+    },
+    {
+      "id": 3,
+      "waterLayers": []
+    },
+    {
+      "id": 4,
+      "waterLayers": []
+    },
+    {
+      "id": 5,
+      "waterLayers": []
+    },
+    {
+      "id": 6,
+      "waterLayers": []
+    },
+    {
+      "id": 7,
+      "waterLayers": []
+    }
+  ],
+  "created": "2025-11-13",
+  "difficulty": "Custom"
+}

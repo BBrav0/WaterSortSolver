@@ -1,0 +1,40 @@
+{
+  "name": "Demo Puzzle - Classic 6 Colors",
+  "description": "A classic water sort puzzle with 6 colors and 8 tubes",
+  "tubes": [
+    {
+      "id": 0,
+      "waterLayers": ["color1", "color2", "color3", "color4"]
+    },
+    {
+      "id": 1,
+      "waterLayers": ["color4", "color3", "color2", "color1"]
+    },
+    {
+      "id": 2,
+      "waterLayers": ["color5", "color6", "color1", "color2"]
+    },
+    {
+      "id": 3,
+      "waterLayers": ["color2", "color1", "color6", "color5"]
+    },
+    {
+      "id": 4,
+      "waterLayers": ["color3", "color4", "color5", "color6"]
+    },
+    {
+      "id": 5,
+      "waterLayers": ["color6", "color5", "color4", "color3"]
+    },
+    {
+      "id": 6,
+      "waterLayers": []
+    },
+    {
+      "id": 7,
+      "waterLayers": []
+    }
+  ],
+  "created": "2025-11-12",
+  "difficulty": "Medium"
+}

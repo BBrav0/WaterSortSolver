@@ -9,15 +9,54 @@
 <body>
     <div class="game-container">
         <h1>Water Sort Game</h1>
+        <div class="controls">
+            <button id="setupBtn">Setup Mode</button>
+            <button id="resetBoardBtn" style="display: none;">Reset Board</button>
+            <button id="autoSolveBtn" style="display: none;">Auto Solve</button>
+        </div>
+        <div class="color-palette" id="colorPalette" style="display: none;">
+            <h3>Color Palette</h3>
+            <div class="setup-instructions">
+                <p><strong>Setup Mode Instructions:</strong></p>
+                <p>• Drag colors from palette to tubes to add water</p>
+                <p>• Drag water between tubes to rearrange colors</p>
+                <p>• Click tubes to remove top water layer</p>
+                <p>• Shift+click tubes to empty completely</p>
+                <p>• Right-click tubes for more options</p>
+            </div>
+            <div class="color-items" id="colorItems">
+                <!-- Color items will be generated here -->
+            </div>
+            <div class="tube-controls">
+                <h4>Tube Management</h4>
+                <div class="tube-count">
+                    <span>Tubes: <span id="tubeCount">8</span></span>
+                </div>
+                <div class="tube-buttons">
+                    <button id="addTubeBtn">Add Tube</button>
+                    <button id="removeTubeBtn">Remove Tube</button>
+                </div>
+            </div>
+            <div class="setup-controls">
+                <button id="clearAllBtn">Clear All</button>
+                <button id="playCustomBtn">Play Custom</button>
+                <button id="saveSetupBtn">Save Setup</button>
+                <button id="loadSetupBtn">Load Setup</button>
+                <input type="file" id="fileInput" accept=".json" style="display: none;">
+            </div>
+        </div>
         <div class="game-board" id="gameBoard">
             <!-- Tubes will be dynamically generated here -->
         </div>
-        <div class="controls">
-            <button id="resetBtn">Reset Game</button>
-            <button id="newGameBtn">New Game</button>
+        <div class="solution-history" id="solutionHistory" style="display: none;">
+            <h3>Solution History</h3>
+            <div class="solution-list" id="solutionList">
+                <!-- Solutions will be displayed here -->
+            </div>
         </div>
     </div>
     <script src="Tube.js"></script>
+    <script src="solver.js"></script>
     <script src="game.js"></script>
 </body>
 </html>

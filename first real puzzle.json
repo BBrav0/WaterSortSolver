@@ -1,0 +1,124 @@
+{
+  "name": "Puzzle 2025-11-13",
+  "description": "Custom water sort puzzle",
+  "tubes": [
+    {
+      "id": 0,
+      "waterLayers": [
+        "color9",
+        "color5",
+        "color6",
+        "color11"
+      ]
+    },
+    {
+      "id": 1,
+      "waterLayers": [
+        "color5",
+        "color4",
+        "color9",
+        "color1"
+      ]
+    },
+    {
+      "id": 2,
+      "waterLayers": [
+        "color8",
+        "color12",
+        "color7",
+        "color10"
+      ]
+    },
+    {
+      "id": 3,
+      "waterLayers": [
+        "color2",
+        "color3",
+        "color9",
+        "color11"
+      ]
+    },
+    {
+      "id": 4,
+      "waterLayers": [
+        "color9",
+        "color8",
+        "color10",
+        "color2"
+      ]
+    },
+    {
+      "id": 5,
+      "waterLayers": [
+        "color8",
+        "color7",
+        "color6",
+        "color5"
+      ]
+    },
+    {
+      "id": 6,
+      "waterLayers": [
+        "color4",
+        "color3",
+        "color2",
+        "color1"
+      ]
+    },
+    {
+      "id": 7,
+      "waterLayers": [
+        "color7",
+        "color5",
+        "color6",
+        "color3"
+      ]
+    },
+    {
+      "id": 8,
+      "waterLayers": [
+        "color11",
+        "color4",
+        "color3",
+        "color7"
+      ]
+    },
+    {
+      "id": 9,
+      "waterLayers": [
+        "color12",
+        "color2",
+        "color10",
+        "color12"
+      ]
+    },
+    {
+      "id": 10,
+      "waterLayers": [
+        "color6",
+        "color12",
+        "color11",
+        "color4"
+      ]
+    },
+    {
+      "id": 11,
+      "waterLayers": [
+        "color1",
+        "color8",
+        "color1",
+        "color10"
+      ]
+    },
+    {
+      "id": 12,
+      "waterLayers": []
+    },
+    {
+      "id": 13,
+      "waterLayers": []
+    }
+  ],
+  "created": "2025-11-13",
+  "difficulty": "Custom"
+}

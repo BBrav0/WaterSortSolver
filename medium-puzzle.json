@@ -1,0 +1,32 @@
+{
+  "name": "Medium Puzzle - 3 Colors",
+  "description": "A medium water sort puzzle with 3 colors and 6 tubes",
+  "tubes": [
+    {
+      "id": 0,
+      "waterLayers": ["color1", "color2", "color1", "color3"]
+    },
+    {
+      "id": 1,
+      "waterLayers": ["color3", "color1", "color2", "color2"]
+    },
+    {
+      "id": 2,
+      "waterLayers": ["color2", "color3", "color3", "color1"]
+    },
+    {
+      "id": 3,
+      "waterLayers": []
+    },
+    {
+      "id": 4,
+      "waterLayers": []
+    },
+    {
+      "id": 5,
+      "waterLayers": []
+    }
+  ],
+  "created": "2025-11-12",
+  "difficulty": "Medium"
+}

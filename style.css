@@ -22,6 +22,188 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+.color-palette {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.setup-instructions {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setup-instructions p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 5px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.setup-instructions p:first-child {
+    color: white;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.color-palette h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.color-items {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.color-item {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    cursor: grab;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 0 auto;
+}
+
+.color-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.color-item.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.tube-controls {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.tube-controls h4 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.tube-count {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.tube-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.tube-buttons button {
+    padding: 8px 12px;
+    font-size: 12px;
+    flex: 1;
+}
+
+.tube-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.setup-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.setup-controls button {
+    padding: 10px 16px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Solution history styles */
+.solution-history {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.solution-history h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.solution-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.solution-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.solution-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.solution-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.solution-details {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.solution-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.solution-actions button {
+    padding: 6px 12px;
+    font-size: 12px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.solution-actions button:hover {
+    background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+}
+
 h1 {
     color: white;
     margin-bottom: 30px;
@@ -52,6 +234,54 @@ h1 {
     box-shadow: 
         inset 0 0 20px rgba(0, 0, 0, 0.1),
         0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tube.setup-mode {
+    cursor: grab;
+    border: 3px dashed #667eea;
+    background: rgba(102, 126, 234, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tube.setup-mode:hover {
+    border-color: #764ba2;
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.tube.setup-mode:active {
+    cursor: grabbing;
+    transform: translateY(0px);
+}
+
+.tube.setup-mode.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.tube.setup-mode.drag-over {
+    border-color: #f06595;
+    background: rgba(240, 101, 149, 0.1);
+    transform: scale(1.02);
+}
+
+/* Visual indicator for tubes with water in setup mode */
+.tube.setup-mode:not(:empty)::before {
+    content: '⋮⋮';
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: #667eea;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.tube.setup-mode:not(:empty):hover::before {
+    opacity: 1;
+    color: #764ba2;
 }
 
 .tube:hover {
@@ -97,14 +327,18 @@ h1 {
 }
 
 /* Water colors */
-.water-red { background: linear-gradient(to bottom, #ff6b6b, #ee5a52); }
-.water-blue { background: linear-gradient(to bottom, #4dabf7, #339af0); }
-.water-green { background: linear-gradient(to bottom, #51cf66, #37b24d); }
-.water-yellow { background: linear-gradient(to bottom, #ffd43b, #fab005); }
-.water-purple { background: linear-gradient(to bottom, #9775fa, #845ef7); }
-.water-orange { background: linear-gradient(to bottom, #ff922b, #fd7e14); }
-.water-pink { background: linear-gradient(to bottom, #f06595, #e64980); }
-.water-cyan { background: linear-gradient(to bottom, #22b8cf, #15aabf); }
+.water-color1 { background: linear-gradient(to bottom, #69308e, #5a277d); }
+.water-color2 { background: linear-gradient(to bottom, #b5392d, #a23128); }
+.water-color3 { background: linear-gradient(to bottom, #db8f51, #c87f47); }
+.water-color4 { background: linear-gradient(to bottom, #d8677b, #c55a6a); }
+.water-color5 { background: linear-gradient(to bottom, #eddb6d, #dac85f); }
+.water-color6 { background: linear-gradient(to bottom, #774b1a, #6a4217); }
+.water-color7 { background: linear-gradient(to bottom, #7f9530, #71842a); }
+.water-color8 { background: linear-gradient(to bottom, #81d486, #73c078); }
+.water-color9 { background: linear-gradient(to bottom, #392ebb, #3227a8); }
+.water-color10 { background: linear-gradient(to bottom, #2e6337, #285730); }
+.water-color11 { background: linear-gradient(to bottom, #636466, #58595a); }
+.water-color12 { background: linear-gradient(to bottom, #67a1e0, #5c90c9); }
 
 .controls {
     display: flex;
@@ -134,10 +368,101 @@ button:active {
     transform: translateY(0);
 }
 
+/* Auto-solve specific styles */
+.solver-highlight {
+    border-color: #ffd700 !important;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 0 30px rgba(255, 215, 0, 0.8) !important;
+    animation: solverPulse 0.6s ease-in-out !important;
+}
+
+@keyframes solverPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        border-color: #ffd700;
+    }
+    50% { 
+        transform: scale(1.1); 
+        border-color: #ffed4e;
+    }
+}
+
+#autoSolveBtn {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+#autoSolveBtn:hover {
+    background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+}
+
+#autoSolveBtn:disabled {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Solver progress indicator */
+.solver-progress {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    animation: slideIn 0.3s ease;
+}
+
+.solver-progress h3 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.solver-progress p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.solver-progress .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 @media (max-width: 768px) {
     .game-container {
         padding: 20px;
         margin: 20px;
+    }
+    
+    .main-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .color-palette {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .color-items {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .tube {
