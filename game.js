@@ -15,6 +15,10 @@ class WaterSortGame {
         this.isAutoSolving = false; // Track if auto-solving is in progress
         this.currentSolution = []; // Track current solution moves
         this.solutionHistoryData = this.loadSolutionHistory(); // Load saved solutions
+        this.animationSpeed = 800; // Default animation speed in milliseconds
+        this.speedControl = document.getElementById('speedControl');
+        this.speedSlider = document.getElementById('speedSlider');
+        this.speedValue = document.getElementById('speedValue');
         this.availableColors = [
             { name: 'color1', hex: '#69308e' },
             { name: 'color2', hex: '#b5392d' },
@@ -49,54 +53,98 @@ class WaterSortGame {
         document.getElementById('resetBoardBtn').addEventListener('click', () => this.resetBoard());
         document.getElementById('autoSolveBtn').addEventListener('click', () => this.autoSolve());
         this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+        
+        // Speed control event listeners
+        this.speedSlider.addEventListener('input', (e) => this.updateAnimationSpeed(e));
+        this.speedSlider.addEventListener('change', (e) => this.showSpeedNotification(e));
     }
 
 
     render() {
         this.gameBoard.innerHTML = '';
         
+        // Apply responsive layout for more than 6 tubes
+        if (this.tubes.length > 6) {
+            this.gameBoard.classList.add('many-tubes');
+            this.renderTubeRows();
+        } else {
+            this.gameBoard.classList.remove('many-tubes');
+            this.renderSingleRow();
+        }
+    }
+
+    renderSingleRow() {
         this.tubes.forEach(tube => {
             const tubeElement = tube.createElement();
-            
-            if (this.setupMode) {
-                tubeElement.classList.add('setup-mode');
-                tubeElement.addEventListener('dragover', (e) => this.handleDragOver(e));
-                tubeElement.addEventListener('drop', (e) => this.handleDrop(e, tube));
-                tubeElement.addEventListener('dragleave', (e) => this.handleDragLeave(e));
-                
-                // Add drag start functionality for tubes in setup mode
-                tubeElement.addEventListener('dragstart', (e) => this.handleTubeDragStart(e, tube));
-                tubeElement.addEventListener('dragend', (e) => this.handleTubeDragEnd(e));
-                tubeElement.draggable = true;
-                
-                // Add click to remove water functionality
-                tubeElement.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (e.shiftKey) {
-                        this.removeWaterFromTube(tube);
-                    } else {
-                        // Regular click removes top water layer
-                        this.removeTopWaterFromTube(tube);
-                    }
-                });
-                
-                // Add right-click context menu for tube operations
-                tubeElement.addEventListener('contextmenu', (e) => {
-                    e.preventDefault();
-                    this.showTubeContextMenu(e, tube);
-                });
-            } else {
-                // Disable tube clicks during auto-solving
-                if (!this.isAutoSolving) {
-                    tubeElement.addEventListener('click', () => this.handleTubeClick(tube));
-                } else {
-                    tubeElement.style.cursor = 'not-allowed';
-                    tubeElement.style.opacity = '0.7';
-                }
-            }
-            
+            this.setupTubeEventListeners(tubeElement, tube);
             this.gameBoard.appendChild(tubeElement);
         });
+    }
+
+    renderTubeRows() {
+        const midpoint = Math.ceil(this.tubes.length / 2);
+        const topRowTubes = this.tubes.slice(0, midpoint);
+        const bottomRowTubes = this.tubes.slice(midpoint);
+
+        // Create top row
+        const topRow = document.createElement('div');
+        topRow.className = 'tube-row';
+        topRowTubes.forEach(tube => {
+            const tubeElement = tube.createElement();
+            this.setupTubeEventListeners(tubeElement, tube);
+            topRow.appendChild(tubeElement);
+        });
+
+        // Create bottom row
+        const bottomRow = document.createElement('div');
+        bottomRow.className = 'tube-row';
+        bottomRowTubes.forEach(tube => {
+            const tubeElement = tube.createElement();
+            this.setupTubeEventListeners(tubeElement, tube);
+            bottomRow.appendChild(tubeElement);
+        });
+
+        this.gameBoard.appendChild(topRow);
+        this.gameBoard.appendChild(bottomRow);
+    }
+
+    setupTubeEventListeners(tubeElement, tube) {
+        if (this.setupMode) {
+            tubeElement.classList.add('setup-mode');
+            tubeElement.addEventListener('dragover', (e) => this.handleDragOver(e));
+            tubeElement.addEventListener('drop', (e) => this.handleDrop(e, tube));
+            tubeElement.addEventListener('dragleave', (e) => this.handleDragLeave(e));
+            
+            // Add drag start functionality for tubes in setup mode
+            tubeElement.addEventListener('dragstart', (e) => this.handleTubeDragStart(e, tube));
+            tubeElement.addEventListener('dragend', (e) => this.handleTubeDragEnd(e));
+            tubeElement.draggable = true;
+            
+            // Add click to remove water functionality
+            tubeElement.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    this.removeWaterFromTube(tube);
+                } else {
+                    // Regular click removes top water layer
+                    this.removeTopWaterFromTube(tube);
+                }
+            });
+            
+            // Add right-click context menu for tube operations
+            tubeElement.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                this.showTubeContextMenu(e, tube);
+            });
+        } else {
+            // Disable tube clicks during auto-solving
+            if (!this.isAutoSolving) {
+                tubeElement.addEventListener('click', () => this.handleTubeClick(tube));
+            } else {
+                tubeElement.style.cursor = 'not-allowed';
+                tubeElement.style.opacity = '0.7';
+            }
+        }
     }
 
     handleTubeClick(tube) {
@@ -377,8 +425,8 @@ class WaterSortGame {
 
                 moveIndex++;
                 
-                // Execute next move after delay
-                setTimeout(executeNextMove, 800);
+                // Execute next move after delay using current animation speed
+                setTimeout(executeNextMove, this.animationSpeed);
             } else {
                 // Invalid move, skip to next
                 console.warn('Invalid move in solution replay:', move);
@@ -421,6 +469,8 @@ class WaterSortGame {
             const hasWater = this.tubes.some(tube => !tube.isEmpty());
             if (hasWater) {
                 document.getElementById('autoSolveBtn').style.display = 'inline-block';
+                // Show speed control when auto-solve is available
+                this.speedControl.style.display = 'flex';
             }
         }
         
@@ -674,6 +724,8 @@ class WaterSortGame {
         document.getElementById('resetBoardBtn').style.display = 'inline-block';
         // Show auto solve button in play mode
         document.getElementById('autoSolveBtn').style.display = 'inline-block';
+        // Show speed control when auto-solve is available
+        this.speedControl.style.display = 'flex';
         
         this.selectedTube = null;
         this.moves = 0;
@@ -997,6 +1049,8 @@ class WaterSortGame {
         const hasWater = this.tubes.some(tube => !tube.isEmpty());
         if (hasWater && !this.setupMode) {
             document.getElementById('autoSolveBtn').style.display = 'inline-block';
+            // Show speed control when auto-solve is available
+            this.speedControl.style.display = 'flex';
         }
     }
 
@@ -1130,8 +1184,8 @@ class WaterSortGame {
 
                 moveIndex++;
                 
-                // Execute next move after delay
-                setTimeout(executeNextMove, 800);
+                // Execute next move after delay using current animation speed
+                setTimeout(executeNextMove, this.animationSpeed);
             } else {
                 // Invalid move, skip to next
                 console.warn('Invalid move in solution:', move);
@@ -1190,6 +1244,33 @@ class WaterSortGame {
         this.isAutoSolving = false;
         this.solver = null;
         this.toggleSetupMode();
+    }
+
+    // Speed control methods
+    updateAnimationSpeed(event) {
+        this.animationSpeed = parseInt(event.target.value);
+        this.speedValue.textContent = `${this.animationSpeed}ms`;
+    }
+
+    showSpeedNotification(event) {
+        const speed = parseInt(event.target.value);
+        let speedDescription = '';
+        
+        if (speed <= 300) {
+            speedDescription = 'Very Fast';
+        } else if (speed <= 600) {
+            speedDescription = 'Fast';
+        } else if (speed <= 1000) {
+            speedDescription = 'Normal';
+        } else if (speed <= 2000) {
+            speedDescription = 'Slow';
+        } else if (speed <= 3000) {
+            speedDescription = 'Very Slow';
+        } else {
+            speedDescription = 'Extremely Slow';
+        }
+        
+        this.showNotification(`Animation speed set to ${speedDescription} (${speed}ms)`);
     }
 }
 

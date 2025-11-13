@@ -213,11 +213,84 @@ h1 {
 
 .game-board {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+    min-height: 200px;
+}
+
+/* Responsive layout for more than 6 tubes */
+.game-board.many-tubes {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.game-board.many-tubes .tube-row {
+    display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 30px;
-    min-height: 300px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    min-height: 220px;
+    align-items: flex-end;
+}
+
+.game-board.many-tubes .tube-row:first-child {
+    margin-bottom: 20px;
+}
+
+/* Add visual separator between rows */
+.game-board.many-tubes .tube-row::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 20%, 
+        rgba(255, 255, 255, 0.3) 80%, 
+        transparent 100%);
+}
+
+/* Adjust tube spacing in two-row layout */
+.game-board.many-tubes .tube {
+    margin: 0 5px;
+}
+
+/* Responsive adjustments for many tubes */
+@media (max-width: 1200px) {
+    .game-board.many-tubes .tube-row {
+        gap: 15px;
+    }
+    
+    .game-board.many-tubes .tube {
+        width: 70px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-board.many-tubes {
+        gap: 20px;
+    }
+    
+    .game-board.many-tubes .tube-row {
+        gap: 10px;
+        padding: 5px;
+        min-height: 160px;
+    }
+    
+    .game-board.many-tubes .tube {
+        width: 50px;
+        height: 140px;
+    }
 }
 
 .tube {
@@ -344,6 +417,73 @@ h1 {
     display: flex;
     gap: 15px;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.speed-control label {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.speed-control input[type="range"] {
+    width: 120px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.speed-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.speed-control input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 12px rgba(40, 167, 69, 0.5);
+}
+
+.speed-control input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.speed-control input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 12px rgba(40, 167, 69, 0.5);
+}
+
+.speed-control span {
+    color: #28a745;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 45px;
+    text-align: center;
 }
 
 button {

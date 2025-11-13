@@ -13,6 +13,11 @@
             <button id="setupBtn">Setup Mode</button>
             <button id="resetBoardBtn" style="display: none;">Reset Board</button>
             <button id="autoSolveBtn" style="display: none;">Auto Solve</button>
+                <div class="speed-control" id="speedControl" style="display: none;">
+                    <label for="speedSlider">Animation Speed:</label>
+                    <input type="range" id="speedSlider" min="100" max="4000" value="800" step="100">
+                    <span id="speedValue">800ms</span>
+                </div>
         </div>
         <div class="color-palette" id="colorPalette" style="display: none;">
             <h3>Color Palette</h3>
